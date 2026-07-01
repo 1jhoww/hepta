@@ -1,0 +1,248 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  transition: var(--transition-smooth);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+}
+
+.scrolled {
+  height: 70px;
+  background: rgba(4, 4, 5, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.logo {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  transition: var(--transition-smooth);
+}
+
+.scrolled .logo {
+  height: 48px;
+}
+
+.logoText {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.logoText span {
+  font-weight: 300;
+  color: var(--text-secondary);
+}
+
+.desktopNav {
+  display: flex;
+  gap: 32px;
+}
+
+.navLink {
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  position: relative;
+  padding: 8px 0;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--text-primary);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navLink:hover {
+  color: var(--text-primary);
+}
+
+.navLink:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.ctaContainer {
+  display: flex;
+  align-items: center;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.ctaButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--text-primary);
+  transform: translateY(101%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+}
+
+.ctaButton:hover {
+  color: var(--bg-primary);
+  border-color: var(--text-primary);
+}
+
+.ctaButton:hover::before {
+  transform: translateY(0);
+}
+
+.mobileMenuToggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 12px;
+  z-index: 1001;
+  position: relative;
+}
+
+/* Mobile Nav Drawer overlay */
+.mobileDrawer {
+  position: fixed;
+  top: 70px; /* Matches the header height on mobile */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(100vh - 70px);
+  background: rgba(4, 4, 5, 0.98);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  z-index: 999;
+  padding: 40px 24px 80px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+  max-width: 320px;
+}
+
+.mobileNavLink {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  width: 100%;
+  text-align: center;
+  padding: 12px;
+  transition: color 0.2s ease;
+}
+
+.mobileNavLink:hover {
+  color: var(--text-primary);
+}
+
+.mobileCtaButton {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 16px;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  text-align: center;
+  border: 1px solid var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.mobileCtaButton:hover {
+  background: transparent;
+  color: var(--text-primary);
+}
+
+@media (max-width: 1024px) {
+  .header {
+    height: 70px;
+  }
+  
+  .logo {
+    height: 40px;
+  }
+  
+  .scrolled {
+    height: 70px;
+  }
+  
+  .scrolled .logo {
+    height: 36px;
+  }
+  
+  .desktopNav,
+  .ctaContainer {
+    display: none;
+  }
+  
+  .mobileMenuToggle {
+    display: block;
+    margin-right: -12px;
+  }
+}

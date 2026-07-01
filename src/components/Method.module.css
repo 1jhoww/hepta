@@ -1,0 +1,585 @@
+.processSection {
+  position: relative;
+  background-color: var(--bg-primary);
+  z-index: 2;
+}
+
+.glowLeft {
+  position: absolute;
+  left: -200px;
+  bottom: 10%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.02) 0%, transparent 70%);
+  filter: blur(55px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sectionHeader {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tag {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 4px 14px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.interactiveTimeline {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 80px;
+  align-items: flex-start;
+}
+
+.stepperCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.stepWrapper {
+  display: flex;
+  gap: 22px;
+  cursor: pointer;
+  padding: 14px 0;
+  position: relative;
+}
+
+.indicatorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 32px;
+  flex-shrink: 0;
+}
+
+.bullet {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  z-index: 2;
+  transition: var(--transition-smooth);
+}
+
+.bulletActive {
+  background-color: var(--text-primary);
+  border-color: var(--text-primary);
+  color: var(--bg-primary);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.2);
+}
+
+.trackLine {
+  width: 1px;
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.05);
+  margin-top: 4px;
+}
+
+.stepContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+
+.stepHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.stepNum {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.stepActive .stepNum {
+  color: var(--text-primary);
+}
+
+.stepTitle {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+}
+
+.stepActive .stepTitle {
+  color: var(--text-primary);
+}
+
+.stepShortDesc {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  transition: color 0.3s ease;
+}
+
+.stepActive .stepShortDesc {
+  color: var(--text-secondary);
+}
+
+.stepFullDescMobile {
+  display: none;
+}
+
+/* Cockpit visualizer module */
+.cockpitCol {
+  position: sticky;
+  top: 130px;
+}
+
+.cockpitCard {
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: rgba(9, 9, 11, 0.45);
+  display: flex;
+  flex-direction: column;
+  height: 480px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+}
+
+.cockpitHeader {
+  height: 40px;
+  background-color: rgba(15, 15, 18, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cockpitDots {
+  display: flex;
+  gap: 6px;
+}
+
+.cockpitDots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.cockpitTitle {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.activeStepTag {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 2px 8px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.cockpitBody {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+}
+
+.cockpitInfo {
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  padding-bottom: 18px;
+}
+
+.activeStepTitle {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.activeStepDesc {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.cockpitGraphicContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.graphicContent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Graphics configurations */
+.mockTag {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+  text-align: left;
+}
+
+.discoverMock, .strategyMock, .designMock, .codeMock, .testMock, .launchMock, .evolutionMock {
+  width: 100%;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: rgba(4, 4, 5, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Discover */
+.discoverMock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.briefRow {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.briefRow span {
+  color: var(--text-muted);
+  width: 70px;
+  display: inline-block;
+}
+
+/* Strategy */
+.strategyMock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.schemaNode {
+  background-color: rgba(20, 20, 24, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 8px 14px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  min-width: 150px;
+}
+
+.nodeTitle {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--text-primary);
+}
+
+.nodeAttr {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+}
+
+.schemaLink {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* Design */
+.designCanvas {
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: rgba(20, 20, 24, 0.5);
+  width: 100%;
+}
+
+.canvasHeader {
+  height: 20px;
+  background-color: rgba(15, 15, 18, 0.6);
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  gap: 4px;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.canvasText {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  margin-left: 6px;
+}
+
+.canvasBody {
+  height: 90px;
+  display: flex;
+}
+
+.canvasSidebar {
+  width: 30px;
+  background-color: rgba(15, 15, 18, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.canvasMain {
+  flex: 1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.canvasHeroWidget {
+  height: 24px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 2px;
+}
+
+.canvasGridWidget {
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border-radius: 2px;
+}
+
+/* Code */
+.codeMock {
+  text-align: left;
+}
+
+.codeText {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.7rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+  overflow-x: auto;
+}
+
+/* Testing */
+.testMock {
+  text-align: left;
+}
+
+.terminalHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.terminalBody {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.testLinePass {
+  color: #27c93f;
+}
+
+.testSummary {
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.testStatusSuccess {
+  color: var(--text-primary);
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+/* Launch */
+.launchMock {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+}
+
+.launchLine {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+}
+
+.launchLineSuccess {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #27c93f;
+  margin-top: 4px;
+}
+
+.rocketIconContainer {
+  position: absolute;
+  right: 16px;
+  bottom: 8px;
+}
+
+.pulsingRocket {
+  color: var(--text-primary);
+  opacity: 0.4;
+  animation: floatRocket 2s infinite alternate ease-in-out;
+}
+
+@keyframes floatRocket {
+  0% { transform: translateY(0); opacity: 0.4; }
+  100% { transform: translateY(-6px); opacity: 0.8; }
+}
+
+/* Evolution */
+.evolutionMock {
+  text-align: left;
+}
+
+.chartWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chartTitle {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.chartLines {
+  height: 80px;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.gridLine {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.svgPath {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.chartFooter {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 992px) {
+  .interactiveTimeline {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .cockpitCol {
+    display: none; /* Hide visualizer cockpit on tablet/mobile */
+  }
+  
+  .stepFullDescMobile {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+  
+  .title {
+    font-size: 2.4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .sectionHeader {
+    margin-bottom: 40px;
+  }
+}
