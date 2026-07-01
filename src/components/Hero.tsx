@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Terminal, Database, Shield, Activity } from 'lucide-react';
+import { smoothScrollToId } from '../utils/scrollUtils';
 import styles from './Hero.module.css';
 
 interface Particle {
@@ -19,9 +20,9 @@ export const Hero: React.FC = () => {
   const [isMobile, setIsMobile] = useState(true);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [logs, setLogs] = useState<string[]>([
-    '[sys] inicializando núcleo virtual HEPTA v3.7...',
-    '[db] pool de conexão estabelecido com postgres-primary',
-    '[api] interface websocket conectada na porta 443'
+    '[sistema] inicializando painel de controle comercial...',
+    '[estoque] banco de produtos carregado com sucesso',
+    '[conexão] canal de integração de vendas operacional'
   ]);
 
   const isVisibleRef = useRef(true);
@@ -243,14 +244,14 @@ export const Hero: React.FC = () => {
   // Live System logs loop inside dashboard mockup
   useEffect(() => {
     const logSnippets = [
-      '[sys] contêiner de deploy reconstruído com sucesso',
-      '[hpt] compilado bundle da interface em 244ms',
-      '[db] migrações do banco sincronizadas [18 tabelas]',
-      '[api] GET /v1/telemetry/nodes - 200 OK',
-      '[sys] balanceamento de carga movido para o nó-07',
-      '[sys] largura de banda otimizada (99.8% livre)',
-      '[db] limpeza automática concluída nas tabelas do sistema',
-      '[hpt] recarregando configurações dinâmicas de assets'
+      '[vendas] novo pedido registrado com sucesso',
+      '[painel] relatórios de faturamento atualizados',
+      '[estoque] atualização automática concluída',
+      '[sistema] novo cliente cadastrado na base',
+      '[notificação] mensagem de confirmação enviada via WhatsApp',
+      '[sistema] otimização de velocidade de página concluída',
+      '[segurança] conexões criptografadas verificadas e seguras',
+      '[suporte] monitoramento de estabilidade ativo'
     ];
 
     const interval = setInterval(() => {
@@ -269,16 +270,7 @@ export const Hero: React.FC = () => {
 
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
-    const element = document.getElementById(targetId);
-    if (element) {
-      const headerOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-    }
+    smoothScrollToId(targetId);
   };
 
   // Entrance animations (simplified if reduced motion)
@@ -390,26 +382,26 @@ export const Hero: React.FC = () => {
                 {/* Mock Sidebar */}
                 <div className={styles.mockSidebar}>
                   <div className={styles.sidebarSection}>
-                    <span className={styles.sidebarHeader}>SISTEMAS</span>
+                    <span className={styles.sidebarHeader}>OPERAÇÕES</span>
                     <div className={`${styles.sidebarItem} ${styles.activeItem}`}>
-                      <Activity size={12} /> <span>Telemetria</span>
+                      <Activity size={12} /> <span>Desempenho</span>
                     </div>
                     <div className={styles.sidebarItem}>
-                      <Database size={12} /> <span>Bancos de Dados</span>
+                      <Database size={12} /> <span>Estoque</span>
                     </div>
                     <div className={styles.sidebarItem}>
                       <Shield size={12} /> <span>Segurança</span>
                     </div>
                   </div>
                   <div className={styles.sidebarSection}>
-                    <span className={styles.sidebarHeader}>MÉTRICAS</span>
+                    <span className={styles.sidebarHeader}>VENDAS</span>
                     <div className={styles.metricsShort}>
-                      <div className={styles.miniLabel}>CPU</div>
-                      <div className={styles.miniValue}>12.4%</div>
+                      <div className={styles.miniLabel}>MÊS</div>
+                      <div className={styles.miniValue}>98.2%</div>
                     </div>
                     <div className={styles.metricsShort}>
-                      <div className={styles.miniLabel}>MEM</div>
-                      <div className={styles.miniValue}>1.8GB</div>
+                      <div className={styles.miniLabel}>META</div>
+                      <div className={styles.miniValue}>100%</div>
                     </div>
                   </div>
                 </div>
@@ -419,10 +411,10 @@ export const Hero: React.FC = () => {
                   {/* Stats Row */}
                   <div className={styles.metricsRow}>
                     <div className={styles.metricWidget}>
-                      <div className={styles.widgetLabel}>INSTÂNCIAS EM EXECUÇÃO</div>
+                      <div className={styles.widgetLabel}>PEDIDOS PROCESSADOS</div>
                       <div className={styles.widgetMain}>
-                        <span className={styles.widgetVal}>07</span>
-                        <span className={styles.widgetUnit}>instâncias</span>
+                        <span className={styles.widgetVal}>142</span>
+                        <span className={styles.widgetUnit}>pedidos</span>
                       </div>
                       <div className={styles.widgetGraph}>
                         <div className={styles.graphBar} style={{ height: '40%' }} />
@@ -434,10 +426,10 @@ export const Hero: React.FC = () => {
                     </div>
 
                     <div className={styles.metricWidget}>
-                      <div className={styles.widgetLabel}>LATÊNCIA DE RESPOSTA API</div>
+                      <div className={styles.widgetLabel}>TEMPO DE RESPOSTA</div>
                       <div className={styles.widgetMain}>
-                        <span className={styles.widgetVal}>12</span>
-                        <span className={styles.widgetUnit}>ms (média)</span>
+                        <span className={styles.widgetVal}>0.8</span>
+                        <span className={styles.widgetUnit}>segundos</span>
                       </div>
                       <div className={styles.widgetGraph}>
                         <div className={styles.graphBar} style={{ height: '80%' }} />
@@ -453,7 +445,7 @@ export const Hero: React.FC = () => {
                   <div className={styles.terminalSection}>
                     <div className={styles.terminalHeader}>
                       <Terminal size={12} />
-                      <span>Fluxo de Logs do Servidor</span>
+                      <span>Painel Operacional Ativo</span>
                     </div>
                     <div className={styles.terminalLogs}>
                       {logs.map((log, index) => (
@@ -477,12 +469,29 @@ export const Hero: React.FC = () => {
                   <span className={styles.dotMinimize} />
                   <span className={styles.dotMaximize} />
                 </div>
-                <div className={styles.chromeTitle}>mobile.hepta.io</div>
+                <div className={styles.chromeTitle}>painel.hepta.com.br</div>
               </div>
-              <div className={styles.windowWorkspace} style={{ padding: '20px', flexDirection: 'column' }}>
-                <h4 style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '8px' }}>TELEMETRIA OK</h4>
-                <div className={styles.tableLine} style={{ height: '8px', background: 'rgba(255,255,255,0.06)', borderRadius: '4px', width: '80%', marginBottom: '6px' }} />
-                <div className={styles.tableLine} style={{ height: '8px', background: 'rgba(255,255,255,0.06)', borderRadius: '4px', width: '60%', marginBottom: '6px' }} />
+              <div className={styles.windowWorkspace} style={{ padding: '16px', flexDirection: 'column', alignItems: 'stretch', gap: '10px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-primary)' }}>Operação do Dia</span>
+                  <span style={{ fontSize: '0.6rem', color: '#10b981', background: 'rgba(16,185,129,0.1)', padding: '2px 6px', borderRadius: '4px' }}>● Ativo</span>
+                </div>
+                
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  <div style={{ flex: 1, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)', borderRadius: '6px', padding: '8px', textAlign: 'left' }}>
+                    <div style={{ fontSize: '0.55rem', color: 'var(--text-muted)' }}>Vendas de Hoje</div>
+                    <div style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', marginTop: '2px' }}>R$ 14.820</div>
+                  </div>
+                  <div style={{ flex: 1, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)', borderRadius: '6px', padding: '8px', textAlign: 'left' }}>
+                    <div style={{ fontSize: '0.55rem', color: 'var(--text-muted)' }}>Pedidos Concluídos</div>
+                    <div style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', marginTop: '2px' }}>42</div>
+                  </div>
+                </div>
+
+                <div style={{ background: 'rgba(255,255,255,0.01)', border: '1px solid rgba(255,255,255,0.04)', borderRadius: '6px', padding: '8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <span style={{ fontSize: '0.65rem', color: 'var(--text-secondary)' }}>WhatsApp integrado</span>
+                  <span style={{ fontSize: '0.6rem', color: 'var(--text-muted)' }}>Conectado</span>
+                </div>
               </div>
             </div>
           </div>

@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { smoothScrollToId } from '../utils/scrollUtils';
 import styles from './Header.module.css';
 
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [logoError, setLogoError] = useState(false);
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,18 +40,12 @@ export const Header: React.FC = () => {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
-    const element = document.getElementById(targetId);
-    if (element) {
-      setIsMobileMenuOpen(false);
-      // Smooth scroll adjustment for sticky header
-      const headerOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    setIsMobileMenuOpen(false);
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
+    if (location.pathname !== '/') {
+      navigate(`/#${targetId}`);
+    } else {
+      smoothScrollToId(targetId);
     }
   };
 
@@ -55,7 +54,16 @@ export const Header: React.FC = () => {
       <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
         <div className={`${styles.container} container`}>
           {/* Logo Section */}
-          <a href="#home" onClick={(e) => handleNavClick(e, 'home')} className={styles.logoContainer}>
+          <Link 
+            to="/" 
+            onClick={(e) => {
+              if (location.pathname === '/') {
+                e.preventDefault();
+                smoothScrollToId('home');
+              }
+            }} 
+            className={styles.logoContainer}
+          >
             {!logoError ? (
               <img
                 src="/logohepta.png"
@@ -69,7 +77,7 @@ export const Header: React.FC = () => {
                 HEPTA<span>Studios</span>
               </span>
             )}
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className={styles.desktopNav}>

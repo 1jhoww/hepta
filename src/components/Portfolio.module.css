@@ -539,3 +539,51 @@
     font-size: 1.8rem;
   }
 }
+
+/* Simulation animations */
+.nodeActive {
+  background-color: rgba(255, 255, 255, 0.07) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: var(--text-primary) !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.03);
+  transform: scale(1.02);
+  transition: all 0.3s ease;
+}
+
+.connectorActive {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+  transition: all 0.3s ease;
+}
+
+.slotHighlighted {
+  background-color: rgba(255, 255, 255, 0.07) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.03);
+  transform: scale(1.01);
+  transition: all 0.3s ease;
+}
+
+.readMoreBtn {
+  background: transparent;
+  border: none;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0;
+  padding-bottom: 2px;
+  margin-top: -4px;
+  margin-bottom: 20px;
+  align-self: flex-start;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: inline-block;
+  text-align: left;
+}
+
+.readMoreBtn:hover {
+  border-bottom-color: var(--text-primary);
+}
+
+

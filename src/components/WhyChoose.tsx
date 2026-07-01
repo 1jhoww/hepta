@@ -1,120 +1,137 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ShieldCheck, Cpu, Code2, LineChart } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import styles from './WhyChoose.module.css';
 
+const principlesData = [
+  {
+    num: '01',
+    title: 'Código Autoral & Limpo',
+    desc: 'Desenvolvemos software inteiramente do zero com TypeScript e React. Rejeitamos templates genéricos e excesso de bibliotecas para garantir um código robusto e de fácil manutenção.'
+  },
+  {
+    num: '02',
+    title: 'Arquitetura Escalável',
+    desc: 'Projetamos APIs performáticas e bancos de dados estruturados com redundância, garantindo que o seu sistema suporte o crescimento rápido do tráfego operacional sem gargalos.'
+  },
+  {
+    num: '03',
+    title: 'Design Pixel-Perfect',
+    desc: 'Espaçamentos milimétricos, contrastes refinados, tipografia de alta fidelidade e micro-animações premium. A estética do seu sistema reflete o profissionalismo de elite da sua marca.'
+  },
+  {
+    num: '04',
+    title: 'Performance Cirúrgica',
+    desc: 'Foco absoluto no Core Web Vitals. Carregamentos instantâneos com latência mínima, cache inteligente de assets e renderização veloz para reter usuários e otimizar taxas de engajamento.'
+  },
+  {
+    num: '05',
+    title: 'Segurança Avançada',
+    desc: 'Implementação nativa de criptografia, conformidade com LGPD e controle de acessos (RBAC) rigoroso para manter os dados sensíveis da sua empresa e dos seus clientes invioláveis.'
+  },
+  {
+    num: '06',
+    title: 'Engenharia com Foco em ROI',
+    desc: 'Toda decisão de desenvolvimento é orientada por objetivos comerciais. Projetamos funis de conversão estratégicos e integrações de dados para otimizar os retornos sobre investimentos.'
+  },
+  {
+    num: '07',
+    title: 'Evolução Sem Obsolescência',
+    desc: 'Garantimos suporte ativo pós-lançamento, monitoramento de saúde de servidores e ciclos de atualizações constantes para manter sua plataforma sempre à frente da concorrência.'
+  }
+];
+
 export const WhyChoose: React.FC = () => {
+  const [isMobile, setIsMobile] = useState(true);
+  const [expandedNum, setExpandedNum] = useState<string | null>(null);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || window.matchMedia('(pointer: coarse)').matches);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const handleItemClick = (num: string) => {
+    if (isMobile) {
+      setExpandedNum(prev => (prev === num ? null : num));
+    }
+  };
+
   return (
     <section id="why-choose" className={`${styles.whySection} section-padding`}>
       <div className={`${styles.glowRight} radial-glow`} />
       
-      <div className="container">
-        {/* Bento Layout Header */}
-        <div className={styles.sectionHeader}>
-          <span className={styles.tag}>Diferenciais</span>
-          <h2 className={styles.title}>Os 7 Princípios HEPTA</h2>
-          <p className={styles.subtitle}>
-            A engenharia de elite exige atenção cirúrgica aos detalhes, código limpo e foco absoluto em resultados.
-          </p>
+      <div className={`${styles.principlesContainer} container`}>
+        {/* Left Column: Sticky Manifesto */}
+        <div className={styles.manifestoColumn}>
+          <div className={styles.stickyContent}>
+            <span className={styles.tag}>Diferenciais</span>
+            <h2 className={styles.title}>Os 7 Princípios HEPTA</h2>
+            <p className={styles.subtitle}>
+              Sete diretrizes fundamentais de engenharia de software e design de interfaces que regem tudo o que construímos no nosso estúdio.
+            </p>
+            <div className={styles.manifestoQuote}>
+              <span className={styles.quoteMark}>“</span>
+              Código autoral é poesia funcional. Design de elite é respeito ao usuário. Engenharia sem concessões.
+            </div>
+          </div>
         </div>
 
-        {/* Bento Asymmetric Grid */}
-        <div className={styles.bentoGrid}>
+        {/* Right Column: Connected Timeline */}
+        <div className={styles.timelineColumn}>
+          <div className={styles.timelineLine} />
           
-          {/* Main Manifesto Box (Spans 2 columns on desktop) */}
-          <motion.div 
-            className={`${styles.bentoBlock} ${styles.manifestoBlock} glass`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
-          >
-            <span className={styles.blockTag}>Posicionamento</span>
-            <h3 className={styles.manifestoTitle}>
-              Corte de caminhos não existe em produtos de alto nível. Nós desenvolvemos infraestruturas sob medida.
-            </h3>
-            <p className={styles.manifestoDesc}>
-              Substituímos templates lentos e soluções prontas por código autoral. Acreditamos que a velocidade, segurança e beleza visual andam juntas para criar valor real de mercado.
-            </p>
-          </motion.div>
-
-          {/* Stats / Performance Box */}
-          <motion.div 
-            className={`${styles.bentoBlock} ${styles.statsBlock} glass`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const, delay: 0.1 }}
-          >
-            <div className={styles.statsHeader}>
-              <Cpu size={16} className={styles.accentIcon} />
-              <span className={styles.principleNum}>04 + 05</span>
+          {isMobile && (
+            <div className={styles.mobileHelpText}>
+              Toque em um princípio para ver os detalhes
             </div>
-            <div className={styles.statsValue}>&lt; 1.0s</div>
-            <h4 className={styles.blockTitle}>Performance Extrema & Fluidez</h4>
-            <p className={styles.blockDesc}>
-              Aplicações otimizadas para carregar instantaneamente em qualquer dispositivo, alcançando notas máximas no Core Web Vitals.
-            </p>
-          </motion.div>
+          )}
 
-          {/* Code Quality Box */}
-          <motion.div 
-            className={`${styles.bentoBlock} ${styles.codeBlock} glass`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const, delay: 0.2 }}
-          >
-            <div className={styles.statsHeader}>
-              <Code2 size={16} className={styles.accentIcon} />
-              <span className={styles.principleNum}>01 + 02</span>
-            </div>
-            <h4 className={styles.blockTitle}>Código Autoral & Escalabilidade</h4>
-            <p className={styles.blockDesc}>
-              Programado inteiramente do zero com TypeScript e React. Sem código legado ou dependências redundantes. Uma arquitetura limpa pronta para crescer com sua empresa.
-            </p>
-            <div className={styles.codeSnippet}>
-              <span>const isBespoke = true;</span>
-              <span>const hasTemplate = false;</span>
-            </div>
-          </motion.div>
+          {principlesData.map((principle, index) => {
+            const isExpanded = expandedNum === principle.num;
+            return (
+              <motion.div 
+                key={principle.num}
+                className={`${styles.timelineItem} ${isMobile ? styles.mobileTimelineItem : ''}`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.7, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                onClick={() => handleItemClick(principle.num)}
+              >
+                {/* Connected Bullet Node */}
+                <div className={styles.timelineNode}>
+                  <div className={`${styles.nodeBullet} ${isExpanded && isMobile ? styles.nodeBulletExpanded : ''}`}>
+                    <span className={styles.nodeNumber}>{principle.num}</span>
+                  </div>
+                </div>
 
-          {/* Design / Experience Box */}
-          <motion.div 
-            className={`${styles.bentoBlock} ${styles.designBlock} glass`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const, delay: 0.3 }}
-          >
-            <div className={styles.statsHeader}>
-              <ShieldCheck size={16} className={styles.accentIcon} />
-              <span className={styles.principleNum}>03</span>
-            </div>
-            <h4 className={styles.blockTitle}>Design de Elite</h4>
-            <p className={styles.blockDesc}>
-              Espaçamentos milimétricos, contrastes refinados, tipografia moderna e transições fluidas. A experiência visual do seu sistema reflete a excelência técnica da sua marca.
-            </p>
-          </motion.div>
-
-          {/* ROI / Business Partnership Box */}
-          <motion.div 
-            className={`${styles.bentoBlock} ${styles.roiBlock} glass`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const, delay: 0.4 }}
-          >
-            <div className={styles.statsHeader}>
-              <LineChart size={16} className={styles.accentIcon} />
-              <span className={styles.principleNum}>06 + 07</span>
-            </div>
-            <h4 className={styles.blockTitle}>ROI Estratégico & Parceria</h4>
-            <p className={styles.blockDesc}>
-              Alinhamos engenharia de software com objetivos comerciais. Projetamos fluxos de conversão inteligentes e oferecemos suporte contínuo para manter seu sistema estável e em evolução.
-            </p>
-          </motion.div>
-
+                {/* Text Content */}
+                <div className={styles.timelineContent}>
+                  <h3 className={`${styles.principleTitle} ${isExpanded && isMobile ? styles.principleTitleExpanded : ''}`}>
+                    {principle.title}
+                  </h3>
+                  
+                  <AnimatePresence initial={false}>
+                    {(!isMobile || isExpanded) && (
+                      <motion.p 
+                        key="desc"
+                        initial={isMobile ? { opacity: 0, height: 0, marginTop: 0 } : undefined}
+                        animate={isMobile ? { opacity: 1, height: 'auto', marginTop: 8 } : undefined}
+                        exit={isMobile ? { opacity: 0, height: 0, marginTop: 0 } : undefined}
+                        transition={{ duration: 0.25 }}
+                        className={styles.principleDesc}
+                      >
+                        {principle.desc}
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

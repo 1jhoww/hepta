@@ -131,3 +131,23 @@
     gap: 16px;
   }
 }
+
+.readMoreBtn {
+  background: transparent;
+  border: none;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0;
+  padding-bottom: 2px;
+  margin-top: 16px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.readMoreBtn:hover {
+  border-bottom-color: var(--text-primary);
+}
+

@@ -15,50 +15,50 @@ const steps: MethodStep[] = [
   {
     number: '01',
     title: 'Descobrir',
-    shortDesc: 'Mapeamento de produto e definição de escopo.',
-    description: 'Mergulhamos nos requisitos do seu fluxo de trabalho, mapeando dependências de banco de dados, personas, APIs externas e metas operacionais centrais.',
+    shortDesc: 'Entendimento completo da sua necessidade.',
+    description: 'Mergulhamos nas necessidades do seu dia a dia, mapeando como sua empresa opera, quais ferramentas você já utiliza e quais são seus objetivos comerciais.',
     icon: <Search size={18} />,
   },
   {
     number: '02',
     title: 'Estratégia',
-    shortDesc: 'Arquitetura do sistema e mapa de desenvolvimento.',
-    description: 'Mapeamos a estrutura do banco de dados, escolhemos a melhor infraestrutura de nuvem, definimos as tecnologias e desenhamos o cronograma de desenvolvimento.',
+    shortDesc: 'Planejamento do projeto e cronograma.',
+    description: 'Planejamos como as informações serão organizadas, escolhemos servidores seguros, definimos o plano de ação e desenhamos o cronograma passo a passo.',
     icon: <Database size={18} />,
   },
   {
     number: '03',
     title: 'Design',
-    shortDesc: 'UI de alta fidelidade e protótipos interativos.',
-    description: 'Criamos layouts exclusivos do zero. Recusamos bibliotecas visuais genéricas para construir espaçamentos finos, tipografias cirúrgicas e protótipos de alta fidelidade.',
+    shortDesc: 'Criação visual e telas interativas.',
+    description: 'Desenhamos todas as telas do zero, com visual exclusivo e alinhado à sua marca. Garantimos telas bonitas, profissionais e muito simples de usar.',
     icon: <Layout size={18} />,
   },
   {
     number: '04',
     title: 'Desenvolvimento',
-    shortDesc: 'Programação limpa e integração de sistemas.',
-    description: 'Nossa fase principal: programar a interface frontend e as regras de negócio do backend usando TypeScript puro, React e folha de estilos modular.',
+    shortDesc: 'Desenvolvimento do sistema do zero.',
+    description: 'A fase principal: nossos especialistas constroem todo o sistema programando linha por linha, sem usar templates prontos lentos ou inseguros.',
     icon: <Code size={18} />,
   },
   {
     number: '05',
     title: 'Testes',
-    shortDesc: 'Suítes de teste e auditorias de segurança.',
-    description: 'Testamos endpoints de API, integridade de banco de dados, fluxos de login e permissões operacionais usando scripts automatizados para garantir máxima estabilidade.',
+    shortDesc: 'Garantia de qualidade e segurança.',
+    description: 'Testamos o sistema sob condições reais de uso para garantir que não haja erros de funcionamento, lentidões ou falhas de segurança no dia do lançamento.',
     icon: <ShieldCheck size={18} />,
   },
   {
     number: '06',
     title: 'Lançamento',
-    shortDesc: 'Deploy em produção com zero downtime.',
-    description: 'Configuramos servidores, inicializamos contêineres de nuvem, apontamos domínios e ativamos o sistema com segurança máxima, sem interromper seus fluxos atuais.',
+    shortDesc: 'Publicação segura do seu sistema.',
+    description: 'Colocamos o sistema no ar em servidores robustos e rápidos, realizamos as configurações finais e liberamos o acesso com total segurança.',
     icon: <Rocket size={18} />,
   },
   {
     number: '07',
     title: 'Evolução',
-    shortDesc: 'Acompanhamento de métricas e escalabilidade.',
-    description: 'Após o lançamento, monitoramos o tráfego e as métricas operacionais para realizar manutenções preventivas, otimizar consultas do banco e evoluir o sistema.',
+    shortDesc: 'Melhoria contínua e suporte.',
+    description: 'Acompanhamos o uso no dia a dia para garantir estabilidade, tirar dúvidas do seu time e adicionar novas facilidades conforme sua empresa cresce.',
     icon: <LineChart size={18} />,
   },
 ];
@@ -73,33 +73,33 @@ export const Method: React.FC = () => {
         return (
           <div className={styles.discoverMock}>
             <div className={styles.mockTag}>ESCOPO_DO_PROJETO</div>
-            <div className={styles.briefRow}><span>Objetivo:</span> <strong>Telemetria B2B Escalável</strong></div>
-            <div className={styles.briefRow}><span>Escopo:</span> <strong>Painel Customizado, API Faturamento</strong></div>
-            <div className={styles.briefRow}><span>Segurança:</span> <strong>Acesso por Perfis (RBAC)</strong></div>
+            <div className={styles.briefRow}><span>Objetivo:</span> <strong>Painel de Vendas Integrado</strong></div>
+            <div className={styles.briefRow}><span>Escopo:</span> <strong>Sistema Comercial, Integração WhatsApp</strong></div>
+            <div className={styles.briefRow}><span>Segurança:</span> <strong>Controle de Acessos de Funcionários</strong></div>
             <div className={styles.briefRow}><span>Prazo:</span> <strong>8 Semanas Produção</strong></div>
           </div>
         );
       case 1: // Strategy
         return (
           <div className={styles.strategyMock}>
-            <div className={styles.mockTag}>ESQUEMA_BANCO_DADOS</div>
+            <div className={styles.mockTag}>ESTRUTURA_DE_DADOS</div>
             <div className={styles.schemaNode}>
-              <span className={styles.nodeTitle}>Tabela Usuários</span>
-              <span className={styles.nodeAttr}>id: UUID</span>
-              <span className={styles.nodeAttr}>org_id: UUID (FK)</span>
+              <span className={styles.nodeTitle}>Cadastro de Clientes</span>
+              <span className={styles.nodeAttr}>nome: Texto</span>
+              <span className={styles.nodeAttr}>telefone: Celular</span>
             </div>
             <div className={styles.schemaLink}>[RELAÇÃO 1 : N]</div>
             <div className={styles.schemaNode}>
-              <span className={styles.nodeTitle}>Tabela Transações</span>
-              <span className={styles.nodeAttr}>id: UUID</span>
-              <span className={styles.nodeAttr}>amount: DECIMAL</span>
+              <span className={styles.nodeTitle}>Histórico de Pedidos</span>
+              <span className={styles.nodeAttr}>pedido_id: Número</span>
+              <span className={styles.nodeAttr}>valor: Monetário</span>
             </div>
           </div>
         );
       case 2: // Design
         return (
           <div className={styles.designMock}>
-            <div className={styles.mockTag}>Protótipo Figma</div>
+            <div className={styles.mockTag}>Protótipo Visual</div>
             <div className={styles.designCanvas}>
               <div className={styles.canvasHeader}>
                 <span className={styles.dot} />
@@ -119,16 +119,16 @@ export const Method: React.FC = () => {
       case 3: // Development
         return (
           <div className={styles.codeMock}>
-            <div className={styles.mockTag}>index.tsx</div>
+            <div className={styles.mockTag}>interface.tsx</div>
             <pre className={styles.codeText}>
 {`import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 
-export const TelemetryConsole = () => {
-  const nodes = useMemo(() => fetchNodes(), []);
+export const DashboardConsole = () => {
+  const pedidos = useMemo(() => fetchPedidos(), []);
   return (
     <motion.div layout>
-      {nodes.map(n => <NodeCard key={n.id} {...n} />)}
+      {pedidos.map(p => <PedidoCard key={p.id} {...p} />)}
     </motion.div>
   );
 };`}
@@ -141,14 +141,14 @@ export const TelemetryConsole = () => {
             <div className={styles.mockTag}>SUÍTE_DE_TESTES</div>
             <div className={styles.terminalHeader}>
               <Terminal size={10} />
-              <span>jest --watchAll=false</span>
+              <span>teste --rapido</span>
             </div>
             <div className={styles.terminalBody}>
-              <div className={styles.testLinePass}>PASS  src/tests/auth.test.ts (1.2s)</div>
-              <div className={styles.testLinePass}>PASS  src/tests/billing.test.ts (0.6s)</div>
-              <div className={styles.testLinePass}>PASS  src/tests/webhooks.test.ts (1.9s)</div>
-              <div className={styles.testSummary}>Test Suites: 3 passed, 3 total</div>
-              <div className={styles.testSummary}>Tests: 24 passed, 24 total</div>
+              <div className={styles.testLinePass}>PASS  vendas.cadastro.test.ts (1.2s)</div>
+              <div className={styles.testLinePass}>PASS  pagamentos.whatsapp.test.ts (0.6s)</div>
+              <div className={styles.testLinePass}>PASS  permissao.usuario.test.ts (1.9s)</div>
+              <div className={styles.testSummary}>Testes executados: 3 passados, 3 total</div>
+              <div className={styles.testSummary}>Status geral: OK</div>
               <div className={styles.testStatusSuccess}>COBERTURA: 100% APROVADO</div>
             </div>
           </div>
@@ -158,9 +158,9 @@ export const TelemetryConsole = () => {
           <div className={styles.launchMock}>
             <div className={styles.mockTag}>STATUS_IMPLANTAÇÃO</div>
             <div className={styles.launchLine}>[sys] Gerando arquivos estáticos...</div>
-            <div className={styles.launchLine}>[sys] Sincronizando com a rede Edge...</div>
-            <div className={styles.launchLine}>[sys] Propagação de DNS... OK</div>
-            <div className={styles.launchLineSuccess}>[sys] Sistema ativo @ HTTPS://hepta.io</div>
+            <div className={styles.launchLine}>[sys] Conectando com servidores seguros...</div>
+            <div className={styles.launchLine}>[sys] Configurações de domínio... OK</div>
+            <div className={styles.launchLineSuccess}>[sys] Sistema ativo @ HTTPS://hepta.com.br</div>
             <div className={styles.rocketIconContainer}>
               <Rocket size={32} className={styles.pulsingRocket} />
             </div>
@@ -169,7 +169,7 @@ export const TelemetryConsole = () => {
       case 6: // Evolution
         return (
           <div className={styles.evolutionMock}>
-            <div className={styles.mockTag}>MÉTRICAS_OPERAÇÃO</div>
+            <div className={styles.mockTag}>MELHORIA_CONTINUA</div>
             <div className={styles.chartWrapper}>
               <div className={styles.chartTitle}>EFICIÊNCIA OPERACIONAL</div>
               <div className={styles.chartLines}>
@@ -182,8 +182,8 @@ export const TelemetryConsole = () => {
                 </svg>
               </div>
               <div className={styles.chartFooter}>
-                <span>SEM 1: 42%</span>
-                <span>SEM 7: 98.4%</span>
+                <span>Mês 1: 42%</span>
+                <span>Mês 7: 98.4%</span>
               </div>
             </div>
           </div>
@@ -203,7 +203,7 @@ export const TelemetryConsole = () => {
           <span className={styles.tag}>Metodologia</span>
           <h2 className={styles.title}>O Método HEPTA</h2>
           <p className={styles.subtitle}>
-            Uma estrutura de desenvolvimento em sete etapas projetada para traduzir requisitos complexos em sistemas robustos.
+            Uma estrutura organizada em sete etapas para transformar suas necessidades operacionais em ferramentas digitais estáveis.
           </p>
         </div>
 

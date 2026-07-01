@@ -514,6 +514,47 @@
   }
 }
 
+/* Notebook optimization (e.g. 1366x768 or lower height viewports) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+  .heroSection {
+    padding-top: 100px;
+    min-height: 85vh;
+  }
+  .title {
+    font-size: 3rem;
+  }
+  .subtext {
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+  }
+  .container {
+    gap: 32px;
+    padding: 0 20px;
+  }
+  .mockupMain {
+    height: 350px;
+  }
+  .mockSidebar {
+    width: 160px;
+    padding: 16px 12px;
+    gap: 16px;
+  }
+  .mockDashboardContent {
+    padding: 16px;
+    gap: 16px;
+  }
+  .metricsRow {
+    gap: 12px;
+  }
+  .metricWidget {
+    padding: 12px;
+  }
+  .widgetVal {
+    font-size: 1.8rem;
+  }
+}
+
+
 /* Side decorative status details */
 .sideDecorationLeft,
 .sideDecorationRight {

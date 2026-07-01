@@ -18,43 +18,43 @@ const servicesData: ServiceItem[] = [
   {
     id: 1,
     title: 'Sistemas Web Sob Medida',
-    tag: 'Web Apps / ERP / CRM',
-    description: 'Portais corporativos internos, painéis operacionais responsivos, plataformas de CRM e ERP customizadas e bancos de dados escaláveis projetados sob medida para suas operações.',
+    tag: 'Operação Centralizada',
+    description: 'Portais comerciais, painéis de gerenciamento de vendas e sistemas integrados desenhados sob medida para organizar seus pedidos, reduzir o trabalho manual e centralizar as informações da sua empresa.',
     icon: <Layers size={20} />,
   },
   {
     id: 2,
     title: 'Landing Pages',
-    tag: 'Conversão & Vendas',
-    description: 'Páginas de alta performance, ultrarrápidas e totalmente otimizadas para SEO, projetadas estrategicamente para gerar leads qualificados e acelerar suas conversões.',
+    tag: 'Presença & Vendas',
+    description: 'Páginas rápidas, fáceis de navegar no celular e otimizadas para o Google, desenhadas estrategicamente para atrair clientes locais e aumentar os contatos comerciais da sua empresa.',
     icon: <Zap size={20} />,
   },
   {
     id: 3,
     title: 'Automação de Processos',
-    tag: 'Workflow / Produtividade',
-    description: 'Integrações inteligentes e automações de fluxo de trabalho projetadas para eliminar tarefas repetitivas, otimizar fluxos e multiplicar a produtividade do time.',
+    tag: 'Agilidade & Produtividade',
+    description: 'Sistemas que automatizam o envio de mensagens de confirmação pelo WhatsApp, organizam fluxos de tarefas e conectam seus sistemas para acelerar o atendimento ao cliente.',
     icon: <Cpu size={20} />,
   },
   {
     id: 4,
-    title: 'Design de Interfaces UI/UX',
-    tag: 'Figma / Protótipos',
-    description: 'Layouts modernos, intuitivos e validados para conversão, desenhados para alinhar seu posicionamento de marca a experiências de uso fluidas de elite.',
+    title: 'Design de Interfaces',
+    tag: 'Visual Profissional',
+    description: 'Layouts exclusivos e telas simples de navegar desenhadas do zero para criar uma presença digital marcante que valorize sua marca e facilite a vida do seu cliente.',
     icon: <Palette size={20} />,
   },
   {
     id: 5,
-    title: 'APIs e Integrações',
-    tag: 'Microsserviços / Sync',
-    description: 'Conexões robustas e seguras entre seus bancos de dados, microsserviços externos, gateways de pagamento, CRMs e sistemas legados já existentes.',
+    title: 'Integração de Sistemas',
+    tag: 'Conexão de Ferramentas',
+    description: 'Conexões seguras entre seu site, meios de pagamentos, WhatsApp e ferramentas internas que você já utiliza para que todas as informações funcionem juntas.',
     icon: <Link2 size={20} />,
   },
   {
     id: 6,
-    title: 'Suporte e Evolução',
-    tag: 'DevOps / SLA',
-    description: 'Suporte técnico contínuo, otimização de infraestrutura em nuvem, auditorias frequentes de segurança e novas funcionalidades conforme sua escala exige.',
+    title: 'Suporte e Melhoria',
+    tag: 'Estabilidade do Sistema',
+    description: 'Acompanhamento contínuo do funcionamento dos seus sistemas, correções preventivas e desenvolvimento de novas melhorias à medida que seu negócio expande.',
     icon: <TrendingUp size={20} />,
   },
 ];
@@ -62,6 +62,7 @@ const servicesData: ServiceItem[] = [
 export const Services: React.FC = () => {
   const [activeId, setActiveId] = useState(1);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -70,10 +71,20 @@ export const Services: React.FC = () => {
       setReduceMotion(e.matches);
     };
     mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
+
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || window.matchMedia('(pointer: coarse)').matches);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+      window.removeEventListener('resize', checkMobile);
+    };
   }, []);
 
-  // Custom visual previews for each service type
+  // Custom visual previews for each service type (Desktop version)
   const renderPreview = (id: number) => {
     switch (id) {
       case 1: // Sistemas Web Sob Medida (Admin interface)
@@ -85,48 +96,48 @@ export const Services: React.FC = () => {
                 <span className={styles.dot} />
                 <span className={styles.dot} />
               </div>
-              <div className={styles.consoleTitle}>dashboard_v2.1_hepta</div>
-              <div className={styles.statusBadge}>ACTIVE</div>
+              <div className={styles.consoleTitle}>painel_de_vendas_hepta</div>
+              <div className={styles.statusBadge}>ATIVO</div>
             </div>
             
             <div className={styles.consoleGrid}>
               <div className={styles.statBox}>
-                <span className={styles.statLabel}>Sessões Ativas</span>
-                <span className={styles.statVal}>1,402</span>
+                <span className={styles.statLabel}>Vendas do Mês</span>
+                <span className={styles.statVal}>R$ 142.080</span>
                 <div className={styles.miniProgress}><div style={{ width: '75%' }} /></div>
               </div>
               <div className={styles.statBox}>
-                <span className={styles.statLabel}>Uso da CPU</span>
-                <span className={styles.statVal}>14.2%</span>
-                <div className={styles.miniProgress}><div style={{ width: '40%' }} /></div>
+                <span className={styles.statLabel}>Pedidos Concluídos</span>
+                <span className={styles.statVal}>894</span>
+                <div className={styles.miniProgress}><div style={{ width: '85%' }} /></div>
               </div>
               <div className={styles.statBox}>
-                <span className={styles.statLabel}>Bancos de Dados</span>
-                <span className={styles.statVal}>99.99%</span>
+                <span className={styles.statLabel}>Estabilidade</span>
+                <span className={styles.statVal}>100.0%</span>
                 <div className={styles.miniProgress}><div style={{ width: '99%' }} /></div>
               </div>
             </div>
 
             <div className={styles.consoleTable}>
               <div className={styles.tableRowHeader}>
-                <span>MÓDULO</span>
-                <span>USUÁRIO</span>
+                <span>PEDIDO</span>
+                <span>CLIENTE</span>
                 <span>STATUS</span>
               </div>
               <div className={styles.tableRow}>
-                <span>Gerenciador de Vendas</span>
+                <span>Painel Comercial</span>
                 <span>Ana Clara</span>
-                <span className={styles.badgeSuccess}>Online</span>
+                <span className={styles.badgeSuccess}>Confirmado</span>
               </div>
               <div className={styles.tableRow}>
-                <span>Logs de Integração</span>
-                <span>Sistema [HPT]</span>
-                <span className={styles.badgeSuccess}>Online</span>
+                <span>Sistema de Cadastro</span>
+                <span>Marcos R.</span>
+                <span className={styles.badgeSuccess}>Confirmado</span>
               </div>
               <div className={styles.tableRow}>
-                <span>Painel Operacional</span>
+                <span>Integração de Estoque</span>
                 <span>Rodrigo M.</span>
-                <span className={styles.badgeSuccess}>Online</span>
+                <span className={styles.badgeSuccess}>Confirmado</span>
               </div>
             </div>
           </div>
@@ -137,7 +148,7 @@ export const Services: React.FC = () => {
           <div className={styles.landingPagePreview}>
             <div className={styles.browserBar}>
               <Globe size={10} className={styles.globeIcon} />
-              <div className={styles.browserUrl}>heptastudios.com.br/lp-exemplo</div>
+              <div className={styles.browserUrl}>heptastudios.com.br/pagina-vendas</div>
             </div>
             <div className={styles.lpContent}>
               <div className={styles.lpHeader}>
@@ -150,26 +161,26 @@ export const Services: React.FC = () => {
               </div>
               
               <div className={styles.lpHero}>
-                <div className={styles.lpBadge}>Tecnologia de Elite</div>
+                <div className={styles.lpBadge}>Sua Empresa em Destaque</div>
                 <h4 className={styles.lpHeroTitle}>Acelerando sua Escala Digital.</h4>
                 <p className={styles.lpHeroSubtitle}>
-                  Sistemas autorais e designs premium integrados para criar o futuro da sua empresa.
+                  Páginas de vendas profissionais e rápidas de carregar para reter seus visitantes e atrair mais clientes.
                 </p>
-                <div className={styles.lpCta}>Fale Conosco</div>
+                <div className={styles.lpCta}>Falar com Consultor</div>
               </div>
 
               <div className={styles.lpMetrics}>
                 <div className={styles.metricItem}>
-                  <span className={styles.metricNum}>100</span>
-                  <span className={styles.metricLabel}>Speed</span>
+                  <span className={styles.metricNum}>100%</span>
+                  <span className={styles.metricLabel}>Velocidade</span>
                 </div>
                 <div className={styles.metricItem}>
-                  <span className={styles.metricNum}>A+</span>
-                  <span className={styles.metricLabel}>SEO Rating</span>
+                  <span className={styles.metricNum}>Nota A</span>
+                  <span className={styles.metricLabel}>Google SEO</span>
                 </div>
                 <div className={styles.metricItem}>
-                  <span className={styles.metricNum}>99.9%</span>
-                  <span className={styles.metricLabel}>Uptime</span>
+                  <span className={styles.metricNum}>100%</span>
+                  <span className={styles.metricLabel}>Seguro</span>
                 </div>
               </div>
             </div>
@@ -181,15 +192,15 @@ export const Services: React.FC = () => {
           <div className={styles.automationPreview}>
             <div className={styles.flowHeader}>
               <Activity size={14} className={styles.flowIcon} />
-              <span>MAPEAMENTO DE FLUXO ATIVO</span>
+              <span>FLUXO DE TAREFAS INTEGRADO</span>
             </div>
             
             <div className={styles.flowCanvas}>
               {/* Trigger Node */}
               <div className={styles.flowNode}>
                 <span className={styles.nodeTrigger}>Gatilho</span>
-                <span className={styles.nodeName}>Webhook Recibo</span>
-                <span className={styles.nodeStatus}>Webhook</span>
+                <span className={styles.nodeName}>Cliente Compra</span>
+                <span className={styles.nodeStatus}>Site</span>
               </div>
 
               <div className={styles.flowArrow}>
@@ -199,8 +210,8 @@ export const Services: React.FC = () => {
               {/* Action Node 1 */}
               <div className={styles.flowNode}>
                 <span className={styles.nodeAction}>Ação 01</span>
-                <span className={styles.nodeName}>Verificar CRM</span>
-                <span className={styles.nodeStatus}>API Sync</span>
+                <span className={styles.nodeName}>Atualizar Pedido</span>
+                <span className={styles.nodeStatus}>Painel</span>
               </div>
 
               <div className={styles.flowArrow}>
@@ -210,19 +221,19 @@ export const Services: React.FC = () => {
               {/* Action Node 2 */}
               <div className={styles.flowNode}>
                 <span className={styles.nodeAction}>Ação 02</span>
-                <span className={styles.nodeName}>Notificar Time</span>
-                <span className={styles.nodeStatus}>Slack / Email</span>
+                <span className={styles.nodeName}>Aviso WhatsApp</span>
+                <span className={styles.nodeStatus}>Confirmado</span>
               </div>
             </div>
 
             <div className={styles.flowFooter}>
               <span>Status geral:</span>
-              <span className={styles.badgeSuccess}>● FLUXO ATIVO E INTEGRADO</span>
+              <span className={styles.badgeSuccess}>● TAREFAS AUTOMATIZADAS</span>
             </div>
           </div>
         );
 
-      case 4: // Design de Interfaces UI/UX (Figma Figma-style workspace)
+      case 4: // Design de Interfaces UI/UX
         return (
           <div className={styles.figmaPreview}>
             <div className={styles.figmaHeader}>
@@ -232,28 +243,28 @@ export const Services: React.FC = () => {
                 <span />
                 <span />
               </div>
-              <span className={styles.figmaFileName}>Design System v1.4</span>
+              <span className={styles.figmaFileName}>Design do Sistema - v1.0</span>
               <span className={styles.figmaZoom}>100%</span>
             </div>
 
             <div className={styles.figmaWorkspace}>
               <div className={styles.figmaSidebar}>
-                <span className={styles.sidebarTitle}>Camadas</span>
-                <span className={styles.sidebarLayer}># Header_Desktop</span>
-                <span className={`${styles.sidebarLayer} ${styles.sidebarLayerActive}`}># Hero_Section</span>
-                <span className={styles.sidebarLayer}>  - Button_Primary</span>
-                <span className={styles.sidebarLayer}>  - Button_Secondary</span>
-                <span className={styles.sidebarLayer}># Services_Grid</span>
+                <span className={styles.sidebarTitle}>Telas</span>
+                <span className={styles.sidebarLayer}># Cabeçalho</span>
+                <span className={`${styles.sidebarLayer} ${styles.sidebarLayerActive}`}># Seção_Principal</span>
+                <span className={styles.sidebarLayer}>  - Botão_Principal</span>
+                <span className={styles.sidebarLayer}>  - Caixa_Texto</span>
+                <span className={styles.sidebarLayer}># Rodapé_Final</span>
               </div>
 
               <div className={styles.figmaArtboard}>
                 <div className={styles.figmaComponent}>
-                  <span className={styles.componentLabel}>Componente: Botão</span>
+                  <span className={styles.componentLabel}>Design do Botão</span>
                   <div className={styles.figmaButton}>INICIAR PROJETO</div>
                   <div className={styles.figmaSpecs}>
-                    <span>radius: 100px</span>
-                    <span>font: Outfit 14px</span>
-                    <span>border: 1px active</span>
+                    <span>Arredondado: 100px</span>
+                    <span>Letra: Outfit 14px</span>
+                    <span>Cor: Branco</span>
                   </div>
                 </div>
 
@@ -272,36 +283,36 @@ export const Services: React.FC = () => {
         return (
           <div className={styles.apiPreview}>
             <div className={styles.apiHeader}>
-              <span className={styles.apiMethod}>GET</span>
-              <div className={styles.apiUrlBar}>https://api.hepta.studios/v1/sync/users</div>
-              <span className={styles.apiStatus}>200 OK</span>
+              <span className={styles.apiMethod}>OK</span>
+              <div className={styles.apiUrlBar}>https://api.hepta.com.br/v1/integracoes</div>
+              <span className={styles.apiStatus}>CONECTADO</span>
             </div>
 
             <div className={styles.apiCodeblock}>
 <pre><code>{`{
-  "status": "success",
-  "data": {
-    "sync_id": "hpt_889a74cf10",
-    "nodes_connected": 2,
-    "last_sync": "2026-07-01T00:37:00Z",
-    "records_synced": 182,
-    "latency": "14ms"
+  "status": "sucesso",
+  "detalhes": {
+    "identificador": "hepta_integrador_comercial",
+    "sistemas_conectados": 2,
+    "ultima_sincronizacao": "Tempo real",
+    "pedidos_sincronizados": 182,
+    "estabilidade": "100%"
   },
-  "auth": {
-    "scope": "read_write",
-    "identity": "OAuth2_JWT"
+  "conexao": {
+    "meio_de_pagamento": "Ativo",
+    "whatsapp_notificacoes": "Ativo"
   }
 }`}</code></pre>
             </div>
             
             <div className={styles.apiTelemetry}>
-              <span>Integrando:</span>
+              <span>Sincronizando:</span>
               <div className={styles.syncNodes}>
-                <span>App Cliente</span>
+                <span>Seu Site</span>
                 <div className={styles.syncLine}><span /></div>
-                <span>API Hepta</span>
+                <span>Painel Hepta</span>
                 <div className={styles.syncLine}><span /></div>
-                <span>CRM Terceiro</span>
+                <span>Sistemas Parceiros</span>
               </div>
             </div>
           </div>
@@ -312,35 +323,151 @@ export const Services: React.FC = () => {
           <div className={styles.supportPreview}>
             <div className={styles.supportHeader}>
               <Terminal size={14} className={styles.termIcon} />
-              <span>TERMINAL DE TELEMETRIA HEPTA</span>
+              <span>TERMINAL DE SUPORTE OPERACIONAL</span>
             </div>
 
             <div className={styles.supportTerminal}>
-              <div className={styles.termLine}>[00:00:10] [SYS] Monitoramento de saúde de infraestrutura ativo</div>
-              <div className={styles.termLine}>[00:00:12] [SYS] Uptime do servidor: 100% | Latência média: 21ms</div>
-              <div className={styles.termLine}>[00:00:15] [DB] Backup diário agendado concluído [54.2 MB]</div>
-              <div className={styles.termLine}>[00:00:20] [SEC] Escaneamento de portas finalizado: 0 ameaças encontradas</div>
-              <div className={styles.termLine}>[00:00:25] [DEPLOY] Alteração de versão v3.7.2 para produção com sucesso</div>
-              <div className={styles.termLine}>[00:00:28] [SSL] Certificados de segurança renovados e encriptados</div>
+              <div className={styles.termLine}>[09:00:00] [SIS] Monitoramento ativo - Sem nenhuma falha</div>
+              <div className={styles.termLine}>[09:00:15] [SIS] Velocidade do site carregando abaixo de 0.8s</div>
+              <div className={styles.termLine}>[09:00:30] [EST] Cópia de segurança gerada com sucesso e salva na nuvem</div>
+              <div className={styles.termLine}>[09:00:45] [SEG] Varredura de segurança realizada: 0 ameaças encontradas</div>
+              <div className={styles.termLine}>[09:01:00] [MEL] Nova tela de clientes publicada em ambiente operacional</div>
+              <div className={styles.termLine}>[09:01:15] [SEG] Certificados de navegação segura renovados com sucesso</div>
             </div>
 
             <div className={styles.supportStats}>
               <div className={styles.supportMetric}>
-                <span>Versão Atual</span>
-                <span className={styles.boldVal}>v3.7.2</span>
+                <span>Último Backup</span>
+                <span className={styles.boldVal}>Hoje (Ok)</span>
               </div>
               <div className={styles.supportMetric}>
-                <span>Acordo de Nível (SLA)</span>
+                <span>Tempo no Ar</span>
                 <span className={styles.boldVal}>99.98%</span>
               </div>
               <div className={styles.supportMetric}>
-                <span>Auditoria de Código</span>
-                <span className={styles.boldVal}>PASS</span>
+                <span>Segurança</span>
+                <span className={styles.boldVal}>Certificada</span>
               </div>
             </div>
           </div>
         );
 
+      default:
+        return null;
+    }
+  };
+
+  // Custom visual previews for mobile version
+  const renderMobilePreview = (id: number) => {
+    switch (id) {
+      case 1:
+        return (
+          <div className={styles.mobileMockupCardContent}>
+            <div className={styles.miniMockupHeader}>PAINEL COMERCIAL</div>
+            <div className={styles.miniMockupStatus}>
+              <span className={styles.statusDotGreen}>●</span>
+              <span>Pedidos organizados</span>
+            </div>
+            <div className={styles.miniMockupRow}>
+              <span>Vendas do Dia</span>
+              <strong>R$ 8.450</strong>
+            </div>
+            <div className={styles.miniMockupRow}>
+              <span>Status Operação</span>
+              <span className={styles.badgeSuccess}>Operando</span>
+            </div>
+          </div>
+        );
+      case 2:
+        return (
+          <div className={styles.mobileMockupCardContent}>
+            <div className={styles.miniMockupHeader}>PÁGINA PUBLICADA</div>
+            <div className={styles.miniMockupStatus}>
+              <span className={styles.statusDotGreen}>●</span>
+              <span>Pronta para receber clientes</span>
+            </div>
+            <div className={styles.miniMockupRow}>
+              <span>Velocidade de Carga</span>
+              <strong>100% (Instantânea)</strong>
+            </div>
+            <div className={styles.miniMockupRow}>
+              <span>Presença no Google</span>
+              <span className={styles.badgeSuccess}>Otimizada</span>
+            </div>
+          </div>
+        );
+      case 3:
+        return (
+          <div className={styles.mobileMockupCardContent}>
+            <div className={styles.miniMockupHeader}>AUTOMATIZAÇÃO ATIVA</div>
+            <div className={styles.miniMockupStatus}>
+              <span className={styles.statusDotGreen}>●</span>
+              <span>Tarefas manuais reduzidas</span>
+            </div>
+            <div className={styles.miniMockupRow}>
+              <span>Envio de WhatsApp</span>
+              <strong>Automático</strong>
+            </div>
+            <div className={styles.miniMockupRow}>
+              <span>Tempo Economizado</span>
+              <strong>85% Menos Rotina</strong>
+            </div>
+          </div>
+        );
+      case 4:
+        return (
+          <div className={styles.mobileMockupCardContent}>
+            <div className={styles.miniMockupHeader}>DESIGN EXCLUSIVO</div>
+            <div className={styles.miniMockupStatus}>
+              <span className={styles.statusDotGreen}>●</span>
+              <span>Foco total na experiência</span>
+            </div>
+            <div className={styles.miniMockupRow}>
+              <span>Visual Premium</span>
+              <strong>Pronto</strong>
+            </div>
+            <div className={styles.miniMockupRow}>
+              <span>Navegação no Celular</span>
+              <strong>Fácil e Rápida</strong>
+            </div>
+          </div>
+        );
+      case 5:
+        return (
+          <div className={styles.mobileMockupCardContent}>
+            <div className={styles.miniMockupHeader}>SISTEMAS CONECTADOS</div>
+            <div className={styles.miniMockupStatus}>
+              <span className={styles.statusDotGreen}>●</span>
+              <span>Informações centralizadas</span>
+            </div>
+            <div className={styles.miniMockupRow}>
+              <span>Meios de Pagamento</span>
+              <strong>Integrados</strong>
+            </div>
+            <div className={styles.miniMockupRow}>
+              <span>WhatsApp e CRM</span>
+              <strong>Conectados</strong>
+            </div>
+          </div>
+        );
+      case 6:
+        return (
+          <div className={styles.mobileMockupCardContent}>
+            <div className={styles.miniMockupHeader}>SUPORTE ADICIONAL</div>
+            <div className={styles.miniMockupStatus}>
+              <span className={styles.statusDotGreen}>●</span>
+              <span>Operação sem interrupções</span>
+            </div>
+            <div className={styles.miniMockupRow}>
+              <span>Estabilidade</span>
+              <strong>Monitorada 24h</strong>
+            </div>
+            <div className={styles.miniMockupRow}>
+              <span>Melhorias no Site</span>
+              <strong>Conforme Demanda</strong>
+            </div>
+          </div>
+        );
       default:
         return null;
     }
@@ -358,37 +485,56 @@ export const Services: React.FC = () => {
         {/* Section Header */}
         <div className={styles.sectionHeader}>
           <span className={styles.tag}>Soluções</span>
-          <h2 className={styles.title}>O Que Desenvolvemos</h2>
+          <h2 className={styles.title}>Nossas Soluções</h2>
           <p className={styles.subtitle}>
-            Sistemas e interfaces web de alta performance construídos para impulsionar a escala do seu negócio.
+            Sistemas e interfaces web de alta performance construídos para facilitar suas operações comerciais e acelerar as vendas da sua empresa.
           </p>
         </div>
 
         {/* Editorial Split Showcase Container */}
         <div className={styles.showcaseContainer}>
           
-          {/* Left Side: Dynamic Showcase Visual Panel */}
-          <div className={styles.previewPanel}>
-            <div className={styles.previewBacklight} />
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeId}
-                initial={{ opacity: 0, y: reduceMotion ? 0 : 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: reduceMotion ? 0 : -15 }}
-                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                className={styles.previewWrapper}
-              >
-                {renderPreview(activeId)}
-              </motion.div>
-            </AnimatePresence>
-          </div>
+          {/* Left Side: Dynamic Showcase Visual Panel (Desktop Only) */}
+          {!isMobile && (
+            <div className={styles.previewPanel}>
+              <div className={styles.previewBacklight} />
+              <div className={styles.previewContent}>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeId}
+                    initial={{ opacity: 0, y: reduceMotion ? 0 : 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: reduceMotion ? 0 : -15 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    className={styles.previewWrapper}
+                  >
+                    {renderPreview(activeId)}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Selected Service Text Details directly below visual */}
+              <div className={styles.serviceMetaDetails}>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeId}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <p className={styles.metaDescription}>{activeService.description}</p>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+          )}
 
           {/* Right Side: Editorial Menu Rows */}
           <div className={styles.listPanel}>
             {/* Mobile Interaction Cue */}
             <div className={styles.mobileInteractionCue}>
-              <span>Toque em um serviço para explorar</span>
+              <span>Toque em uma solução para explorar</span>
               <div className={styles.pulseDot} />
             </div>
 
@@ -396,54 +542,56 @@ export const Services: React.FC = () => {
               {servicesData.map((service, index) => {
                 const isActive = service.id === activeId;
                 return (
-                  <div
-                    key={service.id}
-                    onClick={() => setActiveId(service.id)}
-                    className={`${styles.serviceRow} ${isActive ? styles.serviceRowActive : ''}`}
-                  >
-                    <div className={styles.rowLeft}>
-                      <span className={styles.rowNumber}>
-                        {index < 9 ? `0${index + 1}` : index + 1}
-                      </span>
-                      <div className={styles.rowInfo}>
-                        <h3 className={styles.rowTitle}>{service.title}</h3>
-                        <span className={styles.rowTag}>{service.tag}</span>
+                  <React.Fragment key={service.id}>
+                    <div
+                      onClick={() => setActiveId(service.id)}
+                      className={`${styles.serviceRow} ${isActive ? styles.serviceRowActive : ''}`}
+                    >
+                      <div className={styles.rowLeft}>
+                        <span className={styles.rowNumber}>
+                          {index < 9 ? `0${index + 1}` : index + 1}
+                        </span>
+                        <div className={styles.rowInfo}>
+                          <h3 className={styles.rowTitle}>{service.title}</h3>
+                          <span className={styles.rowTag}>{service.tag}</span>
+                        </div>
                       </div>
+
+                      <div className={styles.rowRight}>
+                        <div className={styles.iconWrapper}>
+                          {service.icon}
+                        </div>
+                        <ArrowRight size={16} className={styles.rowArrow} />
+                      </div>
+
+                      {/* Left vertical selector line */}
+                      {isActive && !isMobile && (
+                        <motion.div 
+                          layoutId="activeRowBorder" 
+                          className={styles.activeRowBorder}
+                          transition={{ duration: 0.3, ease: 'easeInOut' }}
+                        />
+                      )}
                     </div>
 
-                    <div className={styles.rowRight}>
-                      <div className={styles.iconWrapper}>
-                        {service.icon}
-                      </div>
-                      <ArrowRight size={16} className={styles.rowArrow} />
-                    </div>
-
-                    {/* Left vertical selector line */}
-                    {isActive && (
-                      <motion.div 
-                        layoutId="activeRowBorder" 
-                        className={styles.activeRowBorder}
-                        transition={{ duration: 0.3, ease: 'easeInOut' }}
-                      />
+                    {/* Accordion-style layout on mobile right under the tapped row */}
+                    {isActive && isMobile && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className={styles.mobilePreviewWrapper}
+                      >
+                        <div className={styles.mobilePreviewCard}>
+                          {renderMobilePreview(service.id)}
+                          <p className={styles.mobileDescription}>{service.description}</p>
+                        </div>
+                      </motion.div>
                     )}
-                  </div>
+                  </React.Fragment>
                 );
               })}
-            </div>
-
-            {/* Selected Service Text Details below menu */}
-            <div className={styles.serviceMetaDetails}>
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeId}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <p className={styles.metaDescription}>{activeService.description}</p>
-                </motion.div>
-              </AnimatePresence>
             </div>
           </div>
 

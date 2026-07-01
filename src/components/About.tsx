@@ -1,23 +1,35 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import styles from './About.module.css';
 
 export const About: React.FC = () => {
+  const [isMobile, setIsMobile] = useState(true);
+  const [showMore, setShowMore] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || window.matchMedia('(pointer: coarse)').matches);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const pillars = [
     {
       num: '01',
       title: 'Propósito Digital',
-      text: 'Não criamos apenas layouts visuais; projetamos arquiteturas de software que estruturam bancos de dados complexos, automatizam fluxos e aceleram seu crescimento.',
+      text: 'Não criamos apenas páginas bonitas; desenvolvemos sistemas completos para organizar suas operações de vendas, centralizar informações e acelerar o crescimento do seu negócio.',
     },
     {
       num: '02',
-      title: 'Engenharia Autoral',
-      text: 'Programamos código autoral limpo em TypeScript, React e CSS modular. Zero excesso ou lixo eletrônico. Apenas infraestruturas seguras, legíveis e de fácil manutenção.',
+      title: 'Engenharia Sob Medida',
+      text: 'Desenvolvemos sistemas inteiramente do zero, limpos e seguros. Sem depender de plataformas prontas lentas. Apenas ferramentas estáveis, rápidas de carregar e fáceis de operar.',
     },
     {
       num: '03',
       title: 'Arquitetura Estratégica',
-      text: 'Alinhamos metas de negócios com experiências de uso fluidas. Configuramos jornadas de alta conversão e integrações robustas preparadas para altos volumes.',
+      text: 'Alinhamos seus objetivos de vendas a telas fáceis de navegar. Criamos caminhos inteligentes para facilitar o trabalho diário e conectar diferentes ferramentas da sua empresa.',
     },
   ];
 
@@ -34,15 +46,35 @@ export const About: React.FC = () => {
             className={styles.storyBlock}
           >
             <span className={styles.tag}>Sobre a HEPTA</span>
-            <h2 className={styles.title}>Sistemas sob medida criados com precisão cirúrgica.</h2>
+            <h2 className={styles.title}>Sistemas sob medida criados para facilitar a sua operação.</h2>
             
             <p className={styles.description}>
-              A HEPTA Studios une posicionamento visual premium com engenharia de software robusta e autoral. Desenvolvemos sistemas B2B sob medida e landing pages que otimizam processos e escalam suas vendas.
+              A HEPTA Studios une design visual de alto nível com desenvolvimento de sistemas robustos e autorais. Criamos portais comerciais e páginas de vendas que organizam processos e ajudam sua empresa a faturar mais.
             </p>
             
-            <p className={styles.subDescription}>
-              Acreditamos que cada elemento de um sistema deve ser um ativo, não um custo. Por isso, recusamos templates genéricos. Cada linha de código é estruturada do zero para garantir máxima performance, segurança e escalabilidade limpa.
-            </p>
+            <AnimatePresence initial={false}>
+              {(!isMobile || showMore) && (
+                <motion.p
+                  key="subDesc"
+                  initial={isMobile ? { opacity: 0, height: 0, marginTop: 0 } : undefined}
+                  animate={isMobile ? { opacity: 1, height: 'auto', marginTop: 16 } : undefined}
+                  exit={isMobile ? { opacity: 0, height: 0, marginTop: 0 } : undefined}
+                  transition={{ duration: 0.3 }}
+                  className={styles.subDescription}
+                >
+                  Acreditamos que cada ferramenta digital deve ser um investimento com retorno claro, e não uma fonte de problemas. Por isso, não usamos templates prontos lentos. Desenvolvemos soluções do zero para garantir estabilidade operacional e velocidade instantânea.
+                </motion.p>
+              )}
+            </AnimatePresence>
+
+            {isMobile && (
+              <button 
+                onClick={() => setShowMore(!showMore)}
+                className={styles.readMoreBtn}
+              >
+                {showMore ? 'Ver menos' : 'Ver mais sobre nossa visão'}
+              </button>
+            )}
           </motion.div>
 
           {/* Right Column: Editorial Typographic List (No Cards!) */}
