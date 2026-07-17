@@ -180,6 +180,7 @@ ${formData.message}
                       className={styles.select}
                     >
                       <option value="Sistema Web Sob Medida">Sistema Web Sob Medida</option>
+                      <option value="Site Institucional">Site Institucional</option>
                       <option value="Landing Page de Alta Conversão">Landing Page de Alta Conversão</option>
                       <option value="Automação de Processos">Automação de Processos</option>
                       <option value="Design de Interfaces UI/UX">Design de Interfaces UI/UX</option>

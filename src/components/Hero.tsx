@@ -329,7 +329,7 @@ export const Hero: React.FC = () => {
           </motion.h1>
 
           <motion.p variants={itemVariants} className={styles.subtext}>
-            Sistemas B2B sob medida, painéis operacionais responsivos e landing pages de alta conversão para líderes de mercado. Código autoral livre de templates e estética de elite.
+            Sistemas B2B sob medida, sites institucionais responsivos e landing pages de alta conversão para líderes de mercado. Código autoral livre de templates e estética de elite.
           </motion.p>
 
           <motion.div variants={itemVariants} className={styles.buttonGroup}>

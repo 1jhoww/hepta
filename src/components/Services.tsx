@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Layers, Zap, Cpu, Palette, Link2, TrendingUp,
+  Layers, Zap, Cpu, Palette, Link2, TrendingUp, Building2,
   Activity, ArrowRight, Terminal, Globe
 } from 'lucide-react';
 import styles from './Services.module.css';
@@ -28,6 +28,13 @@ const servicesData: ServiceItem[] = [
     tag: 'Presença & Vendas',
     description: 'Páginas rápidas, fáceis de navegar no celular e otimizadas para o Google, desenhadas estrategicamente para atrair clientes locais e aumentar os contatos comerciais da sua empresa.',
     icon: <Zap size={20} />,
+  },
+  {
+    id: 7,
+    title: 'Sites Institucionais',
+    tag: 'Presença & Credibilidade',
+    description: 'Sites modernos, responsivos e rápidos, desenvolvidos de acordo com a identidade e os objetivos da sua empresa para construir uma presença digital profissional, estratégica e confiável.',
+    icon: <Building2 size={20} />,
   },
   {
     id: 3,
@@ -181,6 +188,58 @@ export const Services: React.FC = () => {
                 <div className={styles.metricItem}>
                   <span className={styles.metricNum}>100%</span>
                   <span className={styles.metricLabel}>Seguro</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 7: // Sites Institucionais (Corporate website mockup)
+        return (
+          <div className={styles.institutionalPreview}>
+            <div className={styles.institutionalBrowserBar}>
+              <Globe size={10} className={styles.globeIcon} />
+              <span>suaempresa.com.br</span>
+            </div>
+            <div className={styles.institutionalPage}>
+              <div className={styles.institutionalNav}>
+                <div className={styles.institutionalLogo}>SUA EMPRESA</div>
+                <div className={styles.institutionalNavLinks}>
+                  <span>Empresa</span>
+                  <span>Serviços</span>
+                  <span>Contato</span>
+                </div>
+              </div>
+
+              <div className={styles.institutionalHero}>
+                <div className={styles.institutionalIntro}>
+                  <span className={styles.institutionalEyebrow}>Presença que transmite confiança</span>
+                  <h4>Uma empresa sólida merece uma apresentação à altura.</h4>
+                  <p>Identidade, serviços e diferenciais organizados em uma experiência clara e profissional.</p>
+                  <div className={styles.institutionalCta}>Conheça Nossa Empresa</div>
+                </div>
+                <div className={styles.institutionalAboutCard}>
+                  <span className={styles.institutionalCardLabel}>SOBRE NÓS</span>
+                  <strong>Estratégia e experiência para transformar negócios.</strong>
+                  <div className={styles.institutionalNumbers}>
+                    <span><b>12+</b> anos</span>
+                    <span><b>98%</b> confiança</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.institutionalSections}>
+                <div>
+                  <span>01</span>
+                  <strong>Quem Somos</strong>
+                </div>
+                <div>
+                  <span>02</span>
+                  <strong>Serviços</strong>
+                </div>
+                <div>
+                  <span>03</span>
+                  <strong>Contato</strong>
                 </div>
               </div>
             </div>
@@ -396,6 +455,25 @@ export const Services: React.FC = () => {
             </div>
           </div>
         );
+      case 7:
+        return (
+          <div className={styles.institutionalMobilePreview}>
+            <div className={styles.institutionalMobileNav}>
+              <strong>SUA EMPRESA</strong>
+              <span>Empresa&nbsp;&nbsp; Serviços&nbsp;&nbsp; Contato</span>
+            </div>
+            <div className={styles.institutionalMobileHero}>
+              <span>APRESENTAÇÃO EMPRESARIAL</span>
+              <strong>Identidade e credibilidade em cada seção.</strong>
+              <small>Empresa, serviços, diferenciais e contato em uma experiência responsiva.</small>
+            </div>
+            <div className={styles.institutionalMobileSections}>
+              <span>Sobre</span>
+              <span>Serviços</span>
+              <span>Contato</span>
+            </div>
+          </div>
+        );
       case 3:
         return (
           <div className={styles.mobileMockupCardContent}>
@@ -487,7 +565,7 @@ export const Services: React.FC = () => {
           <span className={styles.tag}>Soluções</span>
           <h2 className={styles.title}>Nossas Soluções</h2>
           <p className={styles.subtitle}>
-            Sistemas e interfaces web de alta performance construídos para facilitar suas operações comerciais e acelerar as vendas da sua empresa.
+            Sistemas, sites institucionais e interfaces web de alta performance construídos para fortalecer sua presença digital, facilitar operações e acelerar resultados.
           </p>
         </div>
 

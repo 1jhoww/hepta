@@ -516,6 +516,171 @@
   color: var(--text-muted);
 }
 
+/* 2b. Sites Institucionais (multi-section corporate website) */
+.institutionalPreview {
+  width: 100%;
+  border-radius: 8px;
+  background: #0a0a0c;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  text-align: left;
+}
+
+.institutionalBrowserBar {
+  min-height: 32px;
+  padding: 7px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.62rem;
+}
+
+.institutionalPage {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.institutionalNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.institutionalLogo {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+}
+
+.institutionalNavLinks {
+  display: flex;
+  gap: 16px;
+  font-size: 0.58rem;
+  color: var(--text-muted);
+}
+
+.institutionalHero {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.institutionalIntro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.institutionalEyebrow,
+.institutionalCardLabel {
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.institutionalIntro h4 {
+  font-size: 1.08rem;
+  line-height: 1.2;
+  margin: 6px 0;
+  max-width: 300px;
+}
+
+.institutionalIntro p {
+  font-size: 0.65rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+  max-width: 300px;
+}
+
+.institutionalCta {
+  margin-top: 10px;
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 100px;
+  color: var(--text-primary);
+  font-size: 0.58rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.institutionalAboutCard {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+}
+
+.institutionalAboutCard > strong {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: var(--text-secondary);
+}
+
+.institutionalNumbers {
+  display: flex;
+  gap: 12px;
+  font-size: 0.55rem;
+  color: var(--text-muted);
+}
+
+.institutionalNumbers span {
+  display: flex;
+  flex-direction: column;
+}
+
+.institutionalNumbers b {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  color: var(--text-primary);
+}
+
+.institutionalSections {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.institutionalSections div {
+  padding: 10px 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.institutionalSections div:last-child {
+  border-right: none;
+}
+
+.institutionalSections span {
+  font-size: 0.5rem;
+  color: var(--text-muted);
+}
+
+.institutionalSections strong {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+}
+
 /* 3. Automação de Processos (Workflow diagram) */
 .automationPreview {
   width: 100%;
@@ -1024,6 +1189,7 @@
 
   .adminConsole,
   .landingPagePreview,
+  .institutionalPreview,
   .automationPreview,
   .figmaPreview,
   .apiPreview,
@@ -1081,6 +1247,81 @@
   border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
+.institutionalMobilePreview {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+}
+
+.institutionalMobileNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.institutionalMobileNav strong {
+  font-family: var(--font-heading);
+  font-size: 0.58rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.institutionalMobileNav span {
+  font-size: 0.48rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.institutionalMobileHero {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.institutionalMobileHero > span {
+  font-size: 0.5rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.institutionalMobileHero strong {
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  line-height: 1.3;
+  color: var(--text-primary);
+}
+
+.institutionalMobileHero small {
+  font-size: 0.62rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+.institutionalMobileSections {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.institutionalMobileSections span {
+  font-size: 0.56rem;
+  color: var(--text-secondary);
+  text-align: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.institutionalMobileSections span:last-child {
+  border-right: none;
+}
+
 .miniMockupHeader {
   font-family: var(--font-heading);
   font-size: 0.65rem;
@@ -1117,4 +1358,3 @@
   border-bottom: none;
   padding-bottom: 0;
 }
-

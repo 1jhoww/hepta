@@ -9,7 +9,7 @@ interface Project {
   title: string;
   description: string;
   tech: string[];
-  mockupType: 'portal' | 'erp' | 'saas' | 'landing';
+  mockupType: 'portal' | 'erp' | 'saas' | 'landing' | 'institutional';
 }
 
 const projects: Project[] = [
@@ -44,11 +44,19 @@ const projects: Project[] = [
     description: 'Página de vendas profissional criada do zero, rápida de carregar no celular e desenhada estrategicamente para atrair contatos qualificados e aumentar o faturamento do seu negócio.',
     tech: ['Carregamento Rápido', 'Design no Celular', 'Otimização Google', 'Atração de Clientes'],
     mockupType: 'landing'
+  },
+  {
+    id: 5,
+    category: 'Site Institucional',
+    title: 'Presença Digital Corporativa',
+    description: 'Site institucional moderno e responsivo, alinhado à identidade e aos objetivos comerciais da empresa para apresentar seus serviços, diferenciais e posicionamento de forma profissional, clara e estratégica.',
+    tech: ['Design Responsivo', 'Identidade da Marca', 'Apresentação de Serviços', 'Contato Estratégico'],
+    mockupType: 'institutional'
   }
 ];
 
 export const Portfolio: React.FC = () => {
-  const [activeFilter, setActiveFilter] = useState<'all' | 'systems' | 'pages'>('all');
+  const [activeFilter, setActiveFilter] = useState<'all' | 'systems' | 'pages' | 'institutional'>('all');
   const [isMobile, setIsMobile] = useState(true);
   const [expandedProjects, setExpandedProjects] = useState<number[]>([]);
   
@@ -118,12 +126,13 @@ export const Portfolio: React.FC = () => {
 
   const filteredProjects = projects.filter(project => {
     if (activeFilter === 'all') return true;
-    if (activeFilter === 'systems') return project.mockupType !== 'landing';
+    if (activeFilter === 'systems') return ['portal', 'erp', 'saas'].includes(project.mockupType);
     if (activeFilter === 'pages') return project.mockupType === 'landing';
+    if (activeFilter === 'institutional') return project.mockupType === 'institutional';
     return true;
   });
 
-  const renderProjectMockup = (type: 'portal' | 'erp' | 'saas' | 'landing') => {
+  const renderProjectMockup = (type: Project['mockupType']) => {
     switch (type) {
       case 'portal':
         return (
@@ -235,6 +244,39 @@ export const Portfolio: React.FC = () => {
             </div>
           </div>
         );
+      case 'institutional':
+        return (
+          <div className={`${styles.mockupContainer} ${styles.institutionalBg}`}>
+            <div className={styles.mockupHeader}>
+              <div className={styles.dots}><span/><span/><span/></div>
+              <span className={styles.mockupTitle}>empresa.com.br</span>
+            </div>
+            <div className={styles.institutionalCasePreview}>
+              <div className={styles.institutionalCaseNav}>
+                <strong>NEXA EMPRESAS</strong>
+                <div><span>Empresa</span><span>Serviços</span><span>Contato</span></div>
+              </div>
+              <div className={styles.institutionalCaseContent}>
+                <div className={styles.institutionalCaseIntro}>
+                  <span>PRESENÇA CORPORATIVA</span>
+                  <strong>Soluções que conectam estratégia e confiança.</strong>
+                  <small>Uma apresentação completa da empresa, seus serviços e diferenciais.</small>
+                  <div>Conheça a Empresa</div>
+                </div>
+                <div className={styles.institutionalCaseAbout}>
+                  <span>SOBRE A EMPRESA</span>
+                  <strong>15 anos</strong>
+                  <small>de experiência construindo relações duradouras.</small>
+                </div>
+              </div>
+              <div className={styles.institutionalCaseSections}>
+                <span>Quem Somos</span>
+                <span>Nossos Serviços</span>
+                <span>Fale Conosco</span>
+              </div>
+            </div>
+          </div>
+        );
       default:
         return null;
     }
@@ -249,7 +291,7 @@ export const Portfolio: React.FC = () => {
           <span className={styles.tag}>Casos de Sucesso</span>
           <h2 className={styles.title}>Soluções sob Medida</h2>
           <p className={styles.subtitle}>
-            Uma seleção de portais corporativos sob medida, painéis operacionais e landing pages.
+            Uma seleção de portais corporativos, painéis operacionais, sites institucionais e landing pages sob medida.
           </p>
 
           {/* Filter Stepper */}
@@ -271,6 +313,12 @@ export const Portfolio: React.FC = () => {
               onClick={() => setActiveFilter('pages')}
             >
               Landing Pages
+            </button>
+            <button
+              className={`${styles.filterBtn} ${activeFilter === 'institutional' ? styles.activeFilter : ''}`}
+              onClick={() => setActiveFilter('institutional')}
+            >
+              Sites Institucionais
             </button>
           </div>
         </div>
